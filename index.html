@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- A-Frame と MindAR のライブラリを読み込み -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <!-- 
+      mindar-image に作成した targets.mind のパスを指定 
+    -->
+    <a-scene 
+      mindar-image="imageTargetSrc: ./images/targets.mind;" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false">
+      
+      <!-- アセット（3Dモデルなど）の事前読み込み -->
+      <a-assets>
+        <a-asset-item id="myModel" src="images/SF roll mesh_decimate.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- 
+        targetIndex: 0 は1つ目のターゲット画像に対応
+        このエンティティの中に3Dモデルを配置する
+      -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <!-- 
+          position: 位置 (X Y Z)
+          rotation: 回転 (X Y Z)
+          scale: 拡大縮小 (X Y Z)
+        -->
+        <a-gltf-model 
+          src="#myModel" 
+          position="0 0 0" 
+          rotation="0 0 0" 
+          scale="0.5 0.5 0.5">
+        </a-gltf-model>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
