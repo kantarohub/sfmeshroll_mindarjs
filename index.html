@@ -9,24 +9,25 @@
   <body>
     <!-- パスを relative (./) に変更 -->
     <a-scene 
-      mindar-image="imageTargetSrc: ./images/targets.mind;" 
+      mindar-image="imageTargetSrc: ./images/SFRMtargets.mind;" 
       color-space="sRGB" 
       renderer="colorManagement: true, physicallyCorrectLights" 
       vr-mode-ui="enabled: false">
       
       <a-assets>
+        <!-- ファイル名にスペースが含まれている場合は修正する -->
         <a-asset-item id="myModel" src="./images/SFrollmesh_decimate.glb"></a-asset-item>
       </a-assets>
 
-      <!-- カメラの設定（look-controlsを無効化） -->
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <!-- カメラの設定（look-controlsを有効化） -->
+      <a-camera position="0 1.6 5" look-controls></a-camera>
 
       <!-- ターゲット認識エンティティ -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- 位置をマーカー原点(0 0 0)に変更 -->
+        <!-- 位置をマーカー原点から適切な距離に変更 -->
         <a-gltf-model 
           src="#myModel" 
-          position="0 0 0" 
+          position="0 0 -1.5" 
           rotation="0 0 0" 
           scale="0.5 0.5 0.5">
         </a-gltf-model>
